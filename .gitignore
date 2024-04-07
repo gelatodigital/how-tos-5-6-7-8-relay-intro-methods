@@ -1,0 +1,48 @@
+# Dependency directory
+node_modules
+deployments 
+
+# local env variables
+.env
+
+# coverage
+coverage
+.nyc_output
+
+# cache
+.eslintcache
+
+# hardhat
+artifacts
+cache
+artifacts-zk
+cache-zk
+
+# macOS
+.DS_Store
+*.icloud
+
+# redis
+dump.rdb
+
+# typechain
+typechain
+
+# typescript
+dist
+
+# yarn
+yarn-error.log
+
+# VS Code
+.vscode
+
+.idea
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
