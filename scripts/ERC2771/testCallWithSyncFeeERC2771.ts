@@ -9,7 +9,7 @@ dotenv.config({ path: ".env" });
 
 const ALCHEMY_ID = process.env.ALCHEMY_ID;
 
-const RPC_URL = `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_ID}`;
+const RPC_URL = `https://rpc.arb-blueberry.gelato.digital`;
 
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
@@ -17,13 +17,12 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
 const relay = new GelatoRelay();
 
 const testCallWithSyncFeeERC2771 = async () => {
-  const counter = "0x5dD1100f23278e0e27972eacb4F1B81D97D071B7";
+  const counter = "0x05E1D00A790a2dBDD4757270ddec5198313d4759";
   const abi = ["function increment()"];
- 
-  const user = await signer.getAddress();
-  console.log(user)
-  const chainId = (await provider.getNetwork()).chainId;
 
+  const user = await signer.getAddress();
+  console.log(user);
+  const chainId = (await provider.getNetwork()).chainId;
 
   // Generate the target payload
   const contract = new ethers.Contract(counter, abi, signer);
@@ -41,8 +40,8 @@ const testCallWithSyncFeeERC2771 = async () => {
     feeToken: feeToken,
     isRelayContext: true,
   };
- 
-  const response = await relay.callWithSyncFeeERC2771(request,signer);
+
+  const response = await relay.callWithSyncFeeERC2771(request, signer as any);
 
   console.log(`https://relay.gelato.digital/tasks/status/${response.taskId}`);
 };
