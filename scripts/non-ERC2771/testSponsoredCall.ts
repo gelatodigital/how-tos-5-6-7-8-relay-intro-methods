@@ -7,41 +7,39 @@ dotenv.config({ path: ".env" });
 const ALCHEMY_ID = process.env.ALCHEMY_ID;
 const GELATO_RELAY_API_KEY = process.env.GELATO_RELAY_API_KEY;
 
-console.log(GELATO_RELAY_API_KEY)
-
-const RPC_URL = `https://base.drpc.org`//;https://rpc.arb-blueberry.gelato.digital`// `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_ID}`;
+const RPC_URL = `https://rpc.arb-blueberry.gelato.digital`; //;https://rpc.arb-blueberry.gelato.digital`// `https://eth-goerli.g.alchemy.com/v2/${ALCHEMY_ID}`;
 
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
 
 const relay = new GelatoRelay();
 
+const testSponsoredCall = async () => {
+  const counter = "0x04914ED9098f5447753cde4bbbBB0e07879f9689";
+  const abi = ["function increment()"];
 
-const testSponsoredCall= async () => {
-    const counter = "0xEEeBe2F778AA186e88dCf2FEb8f8231565769C27"; 
-    const abi = ["function increment()"];
+  const chainId = (await provider.getNetwork()).chainId;
+  console.log(chainId);
+  // Generate the target payload
+  const contract = new ethers.Contract(counter, abi, signer);
+  const { data } = await contract.increment.populateTransaction();
 
-    const chainId = (await provider.getNetwork()).chainId
-    console.log(chainId)
-    // Generate the target payload
-    const contract = new ethers.Contract(counter, abi, signer);
-    const { data } = await contract.increment.populateTransaction();
-    
-    // Populate a relay request
-    const request: SponsoredCallRequest = {
-      chainId,
-      target: counter,
-      data: data as string
-    };
-    
-    // Without a specific API key, the relay request will fail! 
-    // Go to https://relay.gelato.network to get a testnet API key with 1Balance.
-    // Send a relay request using Gelato Relay!
-    const response = await relay.sponsoredCall(request, GELATO_RELAY_API_KEY as string);
+  // Populate a relay request
+  const request: SponsoredCallRequest = {
+    chainId,
+    target: counter,
+    data: data as string,
+  };
 
-    console.log(`https://relay.gelato.digital/tasks/status/${response.taskId}`)
+  // Without a specific API key, the relay request will fail!
+  // Go to https://relay.gelato.network to get a testnet API key with 1Balance.
+  // Send a relay request using Gelato Relay!
+  const response = await relay.sponsoredCall(
+    request,
+    GELATO_RELAY_API_KEY as string,
+  );
 
-}
+  console.log(`https://relay.gelato.digital/tasks/status/${response.taskId}`);
+};
 
-
-testSponsoredCall()
+testSponsoredCall();

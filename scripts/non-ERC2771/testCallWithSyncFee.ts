@@ -1,16 +1,12 @@
-import {
-  CallWithSyncFeeRequest,
-  GelatoRelay,
-} from "@gelatonetwork/relay-sdk";
+import { CallWithSyncFeeRequest, GelatoRelay } from "@gelatonetwork/relay-sdk";
 import { ethers } from "ethers";
 import * as dotenv from "dotenv";
-
 
 dotenv.config({ path: ".env" });
 
 const ALCHEMY_ID = process.env.ALCHEMY_ID;
 
-const RPC_URL = `https://rpc.sepolia-api.lisk.com`;
+const RPC_URL = `https://rpc.arb-blueberry.gelato.digital`;
 
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
@@ -18,7 +14,7 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
 const relay = new GelatoRelay();
 
 const testCallWithSyncFee = async () => {
-  const counter = "0x730615186326cF8f03E34a2B49ed0f43A38c0603";
+  const counter = "0x0c3E7A7B6D1e0f26e87CE3BFA19616c8062Db3bB";
   const abi = ["function increment()"];
 
   const user = await signer.getAddress();
