@@ -1,4 +1,4 @@
-# How To #6-7-8 on Gelato: Relay Methods
+# How To #5-6-7-8 on Gelato: Relay Methods
 
 ## Introduction to Gelato Relay
 
@@ -24,7 +24,7 @@ This method executes a function on behalf of the user, allowing them to submit t
 
 Combining the features of `callWithSyncFee` and EIP-2771 meta transactions, this method provides gasless transaction capabilities. The target contract assumes responsibility for transferring the fee to Gelato's fee collector during transaction execution.
 
-[![Video Walkthrough](https://img.youtube.com/vi/HtRouw0OJgI/0.jpg)](https://youtu.be/HtRouw0OJgI)
+[![Video Walkthrough](https://img.youtube.com/vi/v6cHdGTzf0c/0.jpg)](https://youtu.be/v6cHdGTzf0c)
 
 ### NON ERC2771 MEthods
 
