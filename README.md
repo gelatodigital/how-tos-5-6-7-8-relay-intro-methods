@@ -1,14 +1,34 @@
+# How To #6-7-8 on Gelato: Relay Methods
+
 ## Introduction to Gelato Relay
 
 Using Gelato Relay, we relay your user's transactions on-chain, enabling secure gasless transactions for an ultra smooth UX for your app. This allows for a variety of new web3 experiences, as the user can now pay by only signing a message, or their transaction costs can be sponsored by the developer. As long as the gas costs are covered in one of the multiple payment methods that Gelato supports, we handle the rest reliably, quickly and securely.
 
-### SDK Methods
+[![Video Walkthrough](https://img.youtube.com/vi/4g6k4bwjfno/0.jpg)](https://youtu.be/4g6k4bwjfno)
+
+ <img src="docs/relay.png" width="500"/>
+
+
 
 The Gelato Relay SDK provides developers with various methods to interact with Gelato's infrastructure. Below are four essential SDK methods:
+
+### ERC2771 MEthods
 
 #### sponsoredCallERC2771
 
 This method executes a function on behalf of the user, allowing them to submit tasks without holding any ETH in their wallets. It utilizes the EIP-2771 standard for meta transactions, enabling gasless transactions for users, and leverages Gelato 1balance for payment.
+
+[![Video Walkthrough](https://img.youtube.com/vi/P6LlzSzta1Q/0.jpg)](https://youtu.be/P6LlzSzta1Q)
+
+#### callWithSyncFeeERC2771
+
+Combining the features of `callWithSyncFee` and EIP-2771 meta transactions, this method provides gasless transaction capabilities. The target contract assumes responsibility for transferring the fee to Gelato's fee collector during transaction execution.
+
+[![Video Walkthrough](https://img.youtube.com/vi/HtRouw0OJgI/0.jpg)](https://youtu.be/HtRouw0OJgI)
+
+### NON ERC2771 MEthods
+
+[![Video Walkthrough](https://img.youtube.com/vi/shqLPDerunY/0.jpg)](https://youtu.be/shqLPDerunY)
 
 #### sponsoredCall
 
@@ -18,9 +38,11 @@ Similar to `sponsoredCallERC2771`, this method enables gasless transactions usin
 
 When using callWithSyncFee relay method the target contract assumes responsibility for transferring the fee to Gelato's fee collector during transaction execution.
 
-#### callWithSyncFeeERC2771
 
-Combining the features of `callWithSyncFee` and EIP-2771 meta transactions, this method provides gasless transaction capabilities. The target contract assumes responsibility for transferring the fee to Gelato's fee collector during transaction execution.
+
+
+
+
 
 ## Backend/Node examples
 
