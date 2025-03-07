@@ -18,7 +18,7 @@ const accounts: string[] =  PRIVATE_KEY ? [PRIVATE_KEY] : [];
 
 
 const config: HardhatUserConfig = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: "clinkTestnet",
 
   // hardhat-deploy
   namedAccounts: {
@@ -30,7 +30,7 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       forking: {
-        url: `https://rpc.arb-blueberry.gelato.digital`,
+        url: `https://public-node.rsk.co`,
         //blockNumber:1 ,
       },
     },
@@ -39,22 +39,23 @@ const config: HardhatUserConfig = {
    blueberry: {
       accounts,
       chainId: 88153591557,
-      url: `https://rpc.arb-blueberry.gelato.digital`,
+      url: `https://public-node.rsk.co`,
     },
     raspberry: {
       accounts,
       chainId: 123420111,
       url: `https://rpc.opcelestia-raspberry.gelato.digital`,
     },
-    blackberry: {
+    rootstock: {
       accounts,
-      chainId: 94204209,
-      url: `https://rpc.polygon-blackberry.gelato.digital`,
+      chainId: 30,
+      url: `https://public-node.rsk.co`,
     },
   },
   etherscan: {
     apiKey: {
-      blueberry: "xxx"
+      blueberry: "xxx",
+      clinkTestnet: "xxx"
     },
     customChains: [
       {
@@ -63,6 +64,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://arb-blueberry.gelatoscout.com/api",
           browserURL: "https://arb-blueberry.gelatoscout.com"
+        }
+      },
+      {
+        network: "clinkTestnet",
+        chainId: 123420000987,
+        urls: {
+          apiURL: "https://c1-testnet.cloud.blockscout.com/api",
+          browserURL: "https://c1-testnet.cloud.blockscout.com"
         }
       }
     ]

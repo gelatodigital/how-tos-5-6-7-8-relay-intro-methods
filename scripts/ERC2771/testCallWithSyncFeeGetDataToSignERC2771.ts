@@ -12,7 +12,7 @@ dotenv.config({ path: ".env" });
 const ALCHEMY_ID = process.env.ALCHEMY_ID;
 const GELATO_RELAY_API_KEY = process.env.GELATO_RELAY_API_KEY;
 
-const RPC_URL = `https://rpc.arb-blueberry.gelato.digital`;
+const RPC_URL = `https://public-node.rsk.co`;
 
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
@@ -20,7 +20,7 @@ const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
 const relay = new GelatoRelay();
 
 const testCallWithSyncFeeGetDataToSignERC2771 = async () => {
-  const counter = "0x05E1D00A790a2dBDD4757270ddec5198313d4759";
+  const counter = "0x5dD1100f23278e0e27972eacb4F1B81D97D071B7";
   const abi = ["function increment()"];
 
   const user = await signer.getAddress();

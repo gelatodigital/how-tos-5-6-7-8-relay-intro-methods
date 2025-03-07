@@ -3,14 +3,14 @@ import { ethers } from "ethers";
 import * as dotenv from "dotenv";
 
 dotenv.config({ path: ".env" });
-const RPC_URL = "https://rpc.arb-blueberry.gelato.digital";
+const RPC_URL = "https://public-node.rsk.co";
 const provider = new ethers.JsonRpcProvider(RPC_URL);
 const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, provider);
 const relay = new GelatoRelay();
 
 const testSponsoredCallERC2771 = async () => {
   const GELATO_RELAY_API_KEY = process.env.GELATO_RELAY_API_KEY;
-  const counter = "0x5041c60C75633F29DEb2AED79cB0A9ed79202415";
+  const counter = "0x00172f67db60E5fA346e599cdE675f0ca213b47b";
   const abi = ["function increment()"];
 
   const user = await signer.getAddress();
